@@ -6,7 +6,7 @@
 /*   By: jpedro-a <jpedro-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 17:48:35 by jpedro-a          #+#    #+#             */
-/*   Updated: 2023/07/26 18:50:32 by jpedro-a         ###   ########.fr       */
+/*   Updated: 2023/07/27 16:53:52 by jpedro-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void handle_movement(int keysym, t_data *data)
         mlx_put_image_to_window(data->mlx_display, data->window, data->images_struct->player, data->images_struct->x, data->images_struct->y);
         printf("Pressed key: %d\n", keysym);
     }
-     if ((keysym == 115 || keysym == XK_Down)&& (data->images_struct->y <= WINDOW_HEIGHT - 64))
+     if ((keysym == 115 || keysym == XK_Down)&& (data->images_struct->y < WINDOW_HEIGHT - 64))
     {
         data->images_struct->back_y = data->images_struct->y;
         data->images_struct->y += 64;
