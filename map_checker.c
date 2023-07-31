@@ -95,6 +95,7 @@ int map_check_collectables(t_map *map)
         }
         y++;
     }
+    map->collectables_amount = collectables;
     return (collectables);
 }
 

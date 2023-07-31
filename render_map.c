@@ -48,17 +48,15 @@ int	handle_map(t_data *data, char *map_name)
 		index++;
 	}
 	close(fd);
-	// printf("teste 1\n");
 	data->map_struct->map[index] = NULL;
-	// printf("teste 2\n");
 	copy_map_string(data->map_struct->map, data);
 	return (1);
 }
 
 void load_images(t_data *data, t_img *img, t_map *map)
 {
-		img->player = mlx_xpm_file_to_image(data->mlx_display, PLAYER,
-			&data->images_struct->img_width, &img->img_height);
+	img->player = mlx_xpm_file_to_image(data->mlx_display, PLAYER,
+		&data->images_struct->img_width, &img->img_height);
 	img->floor = mlx_xpm_file_to_image(data->mlx_display, FLOOR,
 			&img->img_width, &img->img_height);
 	img->wall = mlx_xpm_file_to_image(data->mlx_display, WALL, &img->img_width,
@@ -88,9 +86,8 @@ void put_player_enemy(char c, t_data *data, t_img *img, int pos, int arr)
 		data->map_struct->exit_x = pos;
 		data->map_struct->exit_y = arr;
 		mlx_put_image_to_window(data->mlx_display, data->window, img->floor, (pos * 64), (arr * 64));
+		data->map_struct->exit_signal = 0;
 	}
-
-
 }
 
 int	put_map(t_data *data, t_img *img, t_map *map)
@@ -109,7 +106,9 @@ int	put_map(t_data *data, t_img *img, t_map *map)
 			else if (map->map[arr][pos] == '0')
 				mlx_put_image_to_window(data->mlx_display, data->window, img->floor, (pos * 64), (arr * 64));
 			else if (map->map[arr][pos] == 'C')
+			{
 				mlx_put_image_to_window(data->mlx_display, data->window, img->collectable, (pos * 64), (arr * 64));
+			}
 			else if (map->map[arr][pos] == 'X')
 				mlx_put_image_to_window(data->mlx_display, data->window, img->enemy, (pos * 64), (arr * 64));
 			else if (map->map[arr][pos] == 'P')
@@ -118,6 +117,5 @@ int	put_map(t_data *data, t_img *img, t_map *map)
 				put_player_enemy('E', data, img, pos, arr);
         }
     }
-	map->collectables_score = 0;
 	return (1);
 }

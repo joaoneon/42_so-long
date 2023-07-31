@@ -36,18 +36,19 @@ int	main(int ac, char **av)
 
 	handle_map(&data, av[1]);
 	map_check(&map, &data);
+	// ft_printf(data.map_struct)
 
 	data.mlx_display = mlx_init();
 	if (data.mlx_display == NULL)
 		return (MLX_ERROR);
-	data.window = mlx_new_window(data.mlx_display, WINDOW_WIDTH, WINDOW_HEIGHT,
+	data.window = mlx_new_window(data.mlx_display, (data.map_struct->map_x - 1) * 64, data.map_struct->map_y * 64,
 			"Crash Bandicoot 2D experience");
 	if (data.window == NULL)
 	{
 		free(data.window);
 		return (MLX_ERROR);
 	}
-
+	data.map_struct->collectables_score = 0;
 	load_images(&data, &img, &map);
 	mlx_loop_hook(data.mlx_display, &handle_no_event, &data);
 	mlx_hook(data.window, KeyPress, KeyPressMask, &handle_keypress, &data);

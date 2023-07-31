@@ -10,7 +10,8 @@ FILES = ${SRCS_DIR}/ft_printf.c ${SRCS_DIR}/put_char.c \
 			${SRCS_DIR}/put_integer.c ${SRCS_DIR}/put_unsigint.c \
 			${SRCS_DIR}/put_hex.c ${GNL_DIR}/get_next_line_utils.c \
 			${GNL_DIR}/get_next_line.c  main.c handle_resources.c \
-			map_checker.c render_map.c colision_checker.c
+			map_checker.c render_map.c colision_checker.c \
+			win_death.c
 OBJS = ${FILES:.c=.o}
 NAME = so_long
 

@@ -25,7 +25,7 @@
 # define WINDOW_WIDTH  832
 # define WINDOW_HEIGHT 320
 # define MLX_ERROR 1
-#define PLAYER "./imgs/player_64.xpm"
+#define PLAYER "./imgs/player_d_64.xpm"
 #define FLOOR "./imgs/floor_64.xpm"
 #define WALL "./imgs/wall_64.xpm"
 #define EXIT "./imgs/exit_64.xpm"
@@ -44,6 +44,8 @@ typedef struct s_map
     int     map_x;
     int     map_y;
     int     collectables_score;
+    int     collectables_amount;
+    int     exit_signal;
 }   t_map;
 
 typedef struct s_img
@@ -71,6 +73,7 @@ typedef struct s_data
     t_img   *images_struct;
     t_map   *map_struct;
     int teste;
+    int render_signal;
 }   t_data;
 
 int check_file_name(char *str);
@@ -89,5 +92,8 @@ void put_player_enemy(char c, t_data *data, t_img *img, int pos, int arr);
 char	*ft_strdup(char *s);
 int check_colision(int keysym, t_data *data, t_img *img, t_map *map);
 void copy_map_string(char **str, t_data *data);
+void death_animation(t_img *img, t_map *map, t_data *data);
+void    check_collectable(t_img *img, t_map *map, char **mapper, t_data *data);
+void win_animation(t_img *img, t_map *map, t_data *data);
 
 #endif

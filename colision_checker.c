@@ -39,18 +39,41 @@ void copy_map_string(char **str, t_data *data)
 
 }
 
-void    check_collectable(t_img *img, t_map *map, char **mapper)
+void    check_collectable(t_img *img, t_map *map, char **mapper, t_data *data)
 {
     int x;
     int y;
     x = img->player_x;
     y = img->player_y;
+    (void)data;
 
     if (mapper[y][x] == 'C')
     {
         map->collectables_score += 1;
         mapper[y][x] = '0';
         ft_printf("score: %i\n", map->collectables_score);
+        if (map->collectables_score == map->collectables_amount)
+        {
+            mlx_put_image_to_window(data->mlx_display, data->window, img->exit, (map->exit_x * 64), (map->exit_y * 64));
+            map->exit_signal = 1;
+        }
+    }
+
+
+}
+
+void    check_exit(t_map *map, t_img *img, char **mapper, t_data *data)
+{
+    int x;
+    int y;
+    x = img->player_x;
+    y = img->player_y;
+
+    if (mapper[y][x] == 'E' && map->exit_signal == 1)
+    {
+        win_animation(img, map, data);
+        free_for_finish(data);
+        exit(1);
     }
 
 }
@@ -60,7 +83,6 @@ int check_colision(int keysym, t_data *data, t_img *img, t_map *map)
     // get_player_pos(map, img);
     int x;
     int y;
-    (void)data;
     // (void)img;
     // (void)map;
     char **mapper;
@@ -75,11 +97,18 @@ int check_colision(int keysym, t_data *data, t_img *img, t_map *map)
     if (keysym == 119 || keysym == XK_Up)
     {
         if (mapper[y - 1][x] == '1')
-            return (0);           
+            return (0);
+        else if (mapper[y - 1][x] == 'X')
+        {
+            death_animation(img, map, data);
+            free_for_finish(data);
+            exit (1);
+        }           
         else
         {
             img->player_y -=1;
-            check_collectable(img, map, mapper);
+            check_collectable(img, map, mapper, data);
+            check_exit(map, img, mapper, data);
             return (1);
         }        
     } 
@@ -87,10 +116,17 @@ int check_colision(int keysym, t_data *data, t_img *img, t_map *map)
     {
         if (mapper[y + 1][x] == '1')
             return (0);
+        else if (mapper[y + 1][x] == 'X')
+        {
+            death_animation(img, map, data);
+            free_for_finish(data);
+            exit (1);
+        }
         else
         {
             img->player_y +=1;
-            check_collectable(img, map, mapper);
+            check_collectable(img, map, mapper, data);
+            check_exit(map, img, mapper, data);
             return (1);
         }
     }
@@ -98,10 +134,17 @@ int check_colision(int keysym, t_data *data, t_img *img, t_map *map)
     {
         if (mapper[y][x - 1] == '1')
             return (0);
+        else if (mapper[y][x - 1] == 'X')
+        {
+            death_animation(img, map, data);
+            free_for_finish(data);
+            exit (1);
+        }
         else
         {
             img->player_x -=1;
-            check_collectable(img, map, mapper);
+            check_collectable(img, map, mapper, data);
+            check_exit(map, img, mapper, data);
             return (1);
         }
     }
@@ -109,10 +152,17 @@ int check_colision(int keysym, t_data *data, t_img *img, t_map *map)
     {
         if (mapper[y][x + 1] == '1')
             return (0);
+        else if (mapper[y][x + 1] == 'X')
+        {
+            death_animation(img, map, data);
+            free_for_finish(data);
+            exit (1);
+        }
         else
         {
             img->player_x +=1;
-            check_collectable(img, map, mapper);
+            check_collectable(img, map, mapper, data);
+            check_exit(map, img, mapper, data);
             return (1);
         }
     }
