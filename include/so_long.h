@@ -43,6 +43,7 @@ typedef struct s_map
     int     exit_y;
     int     map_x;
     int     map_y;
+    int     collectables_score;
 }   t_map;
 
 typedef struct s_img
@@ -59,6 +60,8 @@ typedef struct s_img
     int     img_height;
     int     back_x;
     int     back_y;
+    int     player_x;
+    int     player_y;
 }   t_img;
 
 typedef struct s_data
@@ -70,11 +73,21 @@ typedef struct s_data
     int teste;
 }   t_data;
 
+int check_file_name(char *str);
+int	handle_map(t_data *data, char *map_name);
+int	put_map(t_data *data, t_img *img, t_map *map);
+int map_check_walls(t_map *map);
+int map_check(t_map *map, t_data *data);
 int handle_no_event(t_data *data);
-void handle_movement(int keysym, t_data *data);
+void handle_movement(int keysym, t_data *data, t_img *img, t_map *map);
 int handle_keypress(int keysym, t_data *data);
 int   handle_keyrelease(int keysym, t_data *data);
-
-
+void free_for_finish(t_data *data);
+int map_check_players(t_map *map);
+void load_images(t_data *data, t_img *img, t_map *map);
+void put_player_enemy(char c, t_data *data, t_img *img, int pos, int arr);
+char	*ft_strdup(char *s);
+int check_colision(int keysym, t_data *data, t_img *img, t_map *map);
+void copy_map_string(char **str, t_data *data);
 
 #endif
