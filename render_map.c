@@ -77,3 +77,29 @@ void	load_images(t_data *data, t_img *img, t_map *map)
 		&data->images_struct->img_width, &data->images_struct->img_height);
 	put_map(data, img, map);
 }
+
+int	map_flood_collectables(t_map *map)
+{
+	int collectables;
+	char **mapper;
+	int x;
+	int y;
+	int max_y;
+
+	max_y = map->map_y - 1;
+	y = 0;
+	collectables = 0;
+	mapper = map->map_cpy;
+	while (y <= max_y)
+	{
+		x = 0;
+		while (mapper[y][x] != '\0' && mapper[y][x] != '\n')
+		{
+			if (mapper[y][x] == 'C')
+				collectables++;
+			x++;
+		}
+		y++;
+	}
+	return (collectables);
+}

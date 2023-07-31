@@ -20,20 +20,18 @@ char	*ft_strdup(char *s)
 
 void	copy_map_string(char **str, t_data *data)
 {
-	// int max_y;
-	// int lines;
-	// max_y = data->map_struct->map_y;
-	// lines = 0;
-	// while (lines < max_y)
-	// {
-	//     printf("%s", str[lines]);
-	//     ft_printf("counter %i", ft_strlen(str[lines]));
-	//     data->map_struct->map_cpy[lines] = ft_strdup(str[lines]);
-	//     printf("%s", data->map_struct->map_cpy[lines]);
-	//     lines++;
-	// }
-	(void)str;
-	(void)data;
+	int index;
+
+	index = 0;
+
+	data->map_struct->map_cpy = malloc((data->map_struct->map_y + 1)
+		* sizeof(char *));
+	while (str[index] != NULL)
+	{
+		data->map_struct->map_cpy[index] = ft_strdup(str[index]);
+		index++;
+	}
+	data->map_struct->map_cpy[index] = NULL;
 }
 
 void	check_collectable(t_img *img, t_map *map, char **mapper, t_data *data)

@@ -12,7 +12,7 @@ FILES = ${SRCS_DIR}/ft_printf.c ${SRCS_DIR}/put_char.c \
 			${GNL_DIR}/get_next_line.c  main.c handle_resources.c \
 			map_checker.c render_map.c colision_checker.c \
 			win_death.c itoa.c movement_aux.c put_map.c \
-			program_flux.c
+			program_flux.c colision_aux.c
 OBJS = ${FILES:.c=.o}
 NAME = so_long
 

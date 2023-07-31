@@ -29,7 +29,6 @@ int	main(int ac, char **av)
 	t_map map;
 
 	data.images_struct = &img;
-
 	data.map_struct = &map;
 
 	handle_map(&data, av[1]);

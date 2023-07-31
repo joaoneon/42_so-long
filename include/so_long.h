@@ -113,6 +113,10 @@ int check_colision_right(t_data *data, t_img *img, t_map *map, int x, int y);
 int check_colision_down(t_data *data, t_img *img, t_map *map, int x, int y);
 int check_colision_left(t_data *data, t_img *img, t_map *map, int x, int y);
 int check_colision_up(t_data *data, t_img *img, t_map *map, int x, int y);
-
+void	flood_fill(t_map *map, t_data *data, int x, int y);
+int map_check_exit(t_map *map);
+void map_check_p2(t_map *map, t_data *data);
+int	map_check_collectables(t_map *map);
+int	map_flood_collectables(t_map *map);
 
 #endif

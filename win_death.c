@@ -16,90 +16,62 @@ void	win_animation(t_img *img, t_map *map, t_data *data)
 	(void)data;
 }
 
-int	check_colision_up(t_data *data, t_img *img, t_map *map, int x, int y)
+void	flood_fill(t_map *map, t_data *data, int x, int y)
 {
 	char	**mapper;
 
-	mapper = map->map;
-	if (mapper[y - 1][x] == '1')
-		return (0);
-	else if (mapper[y - 1][x] == 'X')
-	{
-		death_animation(img, map, data);
-		free_for_finish(data);
-		exit(1);
-	}
-	else
-	{
-		img->player_y -= 1;
-		check_collectable(img, map, mapper, data);
-		check_exit(map, img, mapper, data);
-		return (1);
-	}
+	mapper = map->map_cpy;
+	if (mapper[y][x] == '1' || mapper[y][x] == 'X')
+		return ;
+	if (mapper[y][x] == 'Z')
+		return ;
+	mapper[y][x] = 'Z';
+	flood_fill(map, data, x, y - 1);
+	flood_fill(map, data, x, y + 1);
+	flood_fill(map, data, x - 1, y);
+	flood_fill(map, data, x + 1, y);
 }
 
-int	check_colision_down(t_data *data, t_img *img, t_map *map, int x, int y)
+int	map_check_exit(t_map *map)
 {
+	int		exits;
 	char	**mapper;
+	int		x;
+	int		y;
+	int		max_y;
 
-	mapper = map->map;
-	if (mapper[y + 1][x] == '1')
-		return (0);
-	else if (mapper[y + 1][x] == 'X')
+	max_y = map->map_y - 1;
+	y = 0;
+	exits = 0;
+	mapper = map->map_cpy;
+	while (y <= max_y)
 	{
-		death_animation(img, map, data);
-		free_for_finish(data);
-		exit(1);
+		x = 0;
+		while (mapper[y][x] != '\0' && mapper[y][x] != '\n')
+		{
+			if (mapper[y][x] == 'E')
+				exits++;
+			x++;
+		}
+		y++;
 	}
-	else
-	{
-		img->player_y += 1;
-		check_collectable(img, map, mapper, data);
-		check_exit(map, img, mapper, data);
-		return (1);
-	}
+	return (exits);
 }
 
-int	check_colision_left(t_data *data, t_img *img, t_map *map, int x, int y)
+void	map_check_p2(t_map *map, t_data *data)
 {
-	char	**mapper;
-
-	mapper = map->map;
-	if (mapper[y][x - 1] == '1')
-		return (0);
-	else if (mapper[y][x - 1] == 'X')
+	if (map_check_exit(map) != 1)
 	{
-		death_animation(img, map, data);
-		free_for_finish(data);
+		ft_printf("There must be 1 exit!\n");
+		free(data->window);
 		exit(1);
 	}
-	else
+	flood_fill(map, data, 1, 1);
+	if (map_check_exit(map) != 0 || map_flood_collectables(map) != 0)
 	{
-		img->player_x -= 1;
-		check_collectable(img, map, mapper, data);
-		check_exit(map, img, mapper, data);
-		return (1);
-	}
-}
-
-int	check_colision_right(t_data *data, t_img *img, t_map *map, int x, int y)
-{
-	char	**mapper;
-
-	mapper = map->map;
-	if (mapper[y][x + 1] == '1')
-		return (0);
-	else if (mapper[y][x + 1] == 'X')
-	{
-		death_animation(img, map, data);
-		free_for_finish(data);
+		ft_printf("after flood\n");
+		ft_printf("Failed flood fill test!\n");
+		free(data->window);
 		exit(1);
-	}
-	else
-	{
-		img->player_x += 1;
-		check_collectable(img, map, mapper, data);
-		check_exit(map, img, mapper, data);
-		return (1);
 	}
 }
