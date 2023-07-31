@@ -14,46 +14,30 @@
 
 int handle_no_event(t_data *data)
 {
-    data->teste = 0;
+    (void)data;
     return (0);
 }
 
-
-
 void handle_movement(int keysym, t_data *data, t_img *img, t_map *map)
 {
-    // check_colision(keysym, data, img, map);
+
     ft_printf("Pressed key: %d\n", keysym);
     if ((keysym == 119 || keysym == XK_Up) && (check_colision(keysym, data, img, map)))
     {
-            data->images_struct->back_y = data->images_struct->y;
-            data->images_struct->y -= 64;
-            mlx_put_image_to_window(data->mlx_display, data->window, data->images_struct->floor, data->images_struct->x, data->images_struct->back_y);
-            mlx_put_image_to_window(data->mlx_display, data->window, data->images_struct->player, data->images_struct->x, data->images_struct->y);
+        move_up(data);
     }
      if ((keysym == 97 || keysym == XK_Left) && (check_colision(keysym, data, img, map)))
     {
-        data->images_struct->back_x = data->images_struct->x;
-        data->images_struct->x -= 64;
-        mlx_put_image_to_window(data->mlx_display, data->window, data->images_struct->floor, data->images_struct->back_x, data->images_struct->y);
-        mlx_put_image_to_window(data->mlx_display, data->window, data->images_struct->player, data->images_struct->x, data->images_struct->y);
-        // ft_printf("Pressed key: %d\n", keysym);
+        move_left(data);
+        
     }
      if ((keysym == 115 || keysym == XK_Down) && (check_colision(keysym, data, img, map)))
     {
-        data->images_struct->back_y = data->images_struct->y;
-        data->images_struct->y += 64;
-        mlx_put_image_to_window(data->mlx_display, data->window, data->images_struct->floor, data->images_struct->x, data->images_struct->back_y);
-        mlx_put_image_to_window(data->mlx_display, data->window, data->images_struct->player, data->images_struct->x, data->images_struct->y);
-        // ft_printf("Pressed key: %d\n", keysym);
+        move_down(data);
     }
      if ((keysym == 100 || keysym == XK_Right) && (check_colision(keysym, data, img, map))) 
     {
-        data->images_struct->back_x = data->images_struct->x;
-        data->images_struct->x += 64;
-        mlx_put_image_to_window(data->mlx_display, data->window, data->images_struct->floor, data->images_struct->back_x, data->images_struct->y);
-        mlx_put_image_to_window(data->mlx_display, data->window, data->images_struct->player, data->images_struct->x, data->images_struct->y);
-        // ft_printf("Pressed key: %d\n", keysym);
+        move_right(data);
     }
 }
 
@@ -75,10 +59,11 @@ int handle_keypress(int keysym, t_data *data)
     handle_movement(keysym, data, img, map);    
     return (0);
 }
+
 int   handle_keyrelease(int keysym, t_data *data)
 {
 
     (void) *data;
-    ft_printf("Released key: %d\n", keysym);
+    (void)keysym;
     return (0);
 }

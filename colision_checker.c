@@ -8,7 +8,7 @@ char	*ft_strdup(char *s)
 
 	len = (int)ft_strlen(s);
 	temp = len;
-	s2 = malloc((len ) * sizeof(char));
+	s2 = malloc((len) * sizeof(char));
 	if (s2 == NULL)
 		return (NULL);
 	while (len-- > 0)
@@ -18,153 +18,83 @@ char	*ft_strdup(char *s)
 	return (s2);
 }
 
-void copy_map_string(char **str, t_data *data)
+void	copy_map_string(char **str, t_data *data)
 {
-    // int max_y;
-    // int lines;
-
-    // max_y = data->map_struct->map_y;
-    // lines = 0;
-    // while (lines < max_y)
-    // {
-    //     printf("%s", str[lines]);
-    //     ft_printf("counter %i", ft_strlen(str[lines]));
-    //     data->map_struct->map_cpy[lines] = ft_strdup(str[lines]);
-    //     printf("%s", data->map_struct->map_cpy[lines]);
-    //     lines++;
-    // }
-
-    (void)str;
-    (void)data;
-
+	// int max_y;
+	// int lines;
+	// max_y = data->map_struct->map_y;
+	// lines = 0;
+	// while (lines < max_y)
+	// {
+	//     printf("%s", str[lines]);
+	//     ft_printf("counter %i", ft_strlen(str[lines]));
+	//     data->map_struct->map_cpy[lines] = ft_strdup(str[lines]);
+	//     printf("%s", data->map_struct->map_cpy[lines]);
+	//     lines++;
+	// }
+	(void)str;
+	(void)data;
 }
 
-void    check_collectable(t_img *img, t_map *map, char **mapper, t_data *data)
+void	check_collectable(t_img *img, t_map *map, char **mapper, t_data *data)
 {
-    int x;
-    int y;
-    x = img->player_x;
-    y = img->player_y;
-    (void)data;
+	int	x;
+	int	y;
 
-    if (mapper[y][x] == 'C')
-    {
-        map->collectables_score += 1;
-        mapper[y][x] = '0';
-        ft_printf("score: %i\n", map->collectables_score);
-        if (map->collectables_score == map->collectables_amount)
-        {
-            mlx_put_image_to_window(data->mlx_display, data->window, img->exit, (map->exit_x * 64), (map->exit_y * 64));
-            map->exit_signal = 1;
-        }
-    }
-
-
+	x = img->player_x;
+	y = img->player_y;
+	(void)data;
+	if (mapper[y][x] == 'C')
+	{
+		map->collectables_score += 1;
+		mapper[y][x] = '0';
+		ft_printf("score: %i\n", map->collectables_score);
+		if (map->collectables_score == map->collectables_amount)
+		{
+			mlx_put_image_to_window(data->mlx_display, data->window, img->exit,
+				(map->exit_x * 64), (map->exit_y * 64));
+			map->exit_signal = 1;
+		}
+	}
 }
 
-void    check_exit(t_map *map, t_img *img, char **mapper, t_data *data)
+void	check_exit(t_map *map, t_img *img, char **mapper, t_data *data)
 {
-    int x;
-    int y;
-    x = img->player_x;
-    y = img->player_y;
+	int	x;
+	int	y;
 
-    if (mapper[y][x] == 'E' && map->exit_signal == 1)
-    {
-        win_animation(img, map, data);
-        free_for_finish(data);
-        exit(1);
-    }
-
+	x = img->player_x;
+	y = img->player_y;
+	if (mapper[y][x] == 'E' && map->exit_signal == 1)
+	{
+		win_animation(img, map, data);
+		free_for_finish(data);
+		exit(1);
+	}
 }
 
-int check_colision(int keysym, t_data *data, t_img *img, t_map *map)
+int	check_colision(int keysym, t_data *data, t_img *img, t_map *map)
 {
-    // get_player_pos(map, img);
-    int x;
-    int y;
-    // (void)img;
-    // (void)map;
-    char **mapper;
-    mapper = map->map;
-    // XK_Up || 119
-    // 97 || XK_Left
-    // 115 || XK_Down
-    // 100 || XK_Right
-    x = img->player_x;
-    y = img->player_y;
+	int	x;
+	int	y;
 
-    if (keysym == 119 || keysym == XK_Up)
-    {
-        if (mapper[y - 1][x] == '1')
-            return (0);
-        else if (mapper[y - 1][x] == 'X')
-        {
-            death_animation(img, map, data);
-            free_for_finish(data);
-            exit (1);
-        }           
-        else
-        {
-            img->player_y -=1;
-            check_collectable(img, map, mapper, data);
-            check_exit(map, img, mapper, data);
-            return (1);
-        }        
-    } 
-    if (keysym == 115 || keysym == XK_Down)
-    {
-        if (mapper[y + 1][x] == '1')
-            return (0);
-        else if (mapper[y + 1][x] == 'X')
-        {
-            death_animation(img, map, data);
-            free_for_finish(data);
-            exit (1);
-        }
-        else
-        {
-            img->player_y +=1;
-            check_collectable(img, map, mapper, data);
-            check_exit(map, img, mapper, data);
-            return (1);
-        }
-    }
-    if (keysym == 97 || keysym == XK_Left)
-    {
-        if (mapper[y][x - 1] == '1')
-            return (0);
-        else if (mapper[y][x - 1] == 'X')
-        {
-            death_animation(img, map, data);
-            free_for_finish(data);
-            exit (1);
-        }
-        else
-        {
-            img->player_x -=1;
-            check_collectable(img, map, mapper, data);
-            check_exit(map, img, mapper, data);
-            return (1);
-        }
-    }
-    if (keysym == 100 || keysym == XK_Right)
-    {
-        if (mapper[y][x + 1] == '1')
-            return (0);
-        else if (mapper[y][x + 1] == 'X')
-        {
-            death_animation(img, map, data);
-            free_for_finish(data);
-            exit (1);
-        }
-        else
-        {
-            img->player_x +=1;
-            check_collectable(img, map, mapper, data);
-            check_exit(map, img, mapper, data);
-            return (1);
-        }
-    }
-    return (0);
+	x = img->player_x;
+	y = img->player_y;
+	if (keysym == 119 || keysym == XK_Up)
+	{
+		return (check_colision_up(data, img, map, x, y));
+	}
+	if (keysym == 115 || keysym == XK_Down)
+	{
+		return (check_colision_down(data, img, map, x, y));
+	}
+	if (keysym == 97 || keysym == XK_Left)
+	{
+		return (check_colision_left(data, img, map, x, y));
+	}
+	if (keysym == 100 || keysym == XK_Right)
+	{
+		return (check_colision_right(data, img, map, x, y));
+	}
+	return (0);
 }

@@ -22,10 +22,11 @@
 #include "get_next_line.h"
 #include <fcntl.h>
 
-# define WINDOW_WIDTH  832
-# define WINDOW_HEIGHT 320
 # define MLX_ERROR 1
 #define PLAYER "./imgs/player_d_64.xpm"
+#define PLAYER_U "./imgs/player_u_64.xpm"
+#define PLAYER_L "./imgs/player_l_64.xpm"
+#define PLAYER_R "./imgs/player_r_64.xpm"
 #define FLOOR "./imgs/floor_64.xpm"
 #define WALL "./imgs/wall_64.xpm"
 #define EXIT "./imgs/exit_64.xpm"
@@ -51,6 +52,9 @@ typedef struct s_map
 typedef struct s_img
 {
     void *player;
+    void *player_u;
+    void *player_l;
+    void *player_r;
     void *floor;
     void *wall;
     void *collectable;
@@ -72,10 +76,11 @@ typedef struct s_data
     void    *window;
     t_img   *images_struct;
     t_map   *map_struct;
-    int teste;
     int render_signal;
+    int steps;
 }   t_data;
 
+int	program_flux(t_data *data, t_img *img, t_map *map, char *av);
 int check_file_name(char *str);
 int	handle_map(t_data *data, char *map_name);
 int	put_map(t_data *data, t_img *img, t_map *map);
@@ -95,5 +100,19 @@ void copy_map_string(char **str, t_data *data);
 void death_animation(t_img *img, t_map *map, t_data *data);
 void    check_collectable(t_img *img, t_map *map, char **mapper, t_data *data);
 void win_animation(t_img *img, t_map *map, t_data *data);
+void	ft_free_ptr(void **ptr);
+char	*ft_itoa(int n);
+void handle_map2(t_data *data, int fd, char *str);
+void	put_map_aux(t_data *data, t_img *img, char c, int pos, int arr);
+void	move_up(t_data *data);
+void	move_down(t_data *data);
+void	move_left(t_data *data);
+void	move_right(t_data *data);
+void	check_exit(t_map *map, t_img *img, char **mapper, t_data *data);
+int check_colision_right(t_data *data, t_img *img, t_map *map, int x, int y);
+int check_colision_down(t_data *data, t_img *img, t_map *map, int x, int y);
+int check_colision_left(t_data *data, t_img *img, t_map *map, int x, int y);
+int check_colision_up(t_data *data, t_img *img, t_map *map, int x, int y);
+
 
 #endif
