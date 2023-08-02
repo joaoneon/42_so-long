@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   itoa.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpedro-a <jpedro-a@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/02 14:57:40 by jpedro-a          #+#    #+#             */
+/*   Updated: 2023/08/02 17:58:25 by jpedro-a         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 static size_t	is_negative(int n)
@@ -48,4 +60,32 @@ char	*ft_itoa(int n)
 		digits--;
 	}
 	return (result);
+}
+
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	void	*ptr;
+	size_t	i;
+
+	i = nmemb * size;
+	if (i != 0 && i / size != nmemb)
+		return (NULL);
+	ptr = (void *)malloc(nmemb * size);
+	if (ptr == NULL)
+		return (NULL);
+	ft_memset(ptr, 0, nmemb * size);
+	return (ptr);
+}
+
+void	*ft_memset(void *s, int c, size_t x)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < x)
+	{
+		((unsigned char *)s)[i] = c;
+		i++;
+	}
+	return (s);
 }

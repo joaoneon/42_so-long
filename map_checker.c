@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_checker.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpedro-a <jpedro-a@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/02 14:58:08 by jpedro-a          #+#    #+#             */
+/*   Updated: 2023/08/02 16:38:02 by jpedro-a         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 int	check_file_name(char *str)
@@ -15,7 +27,7 @@ int	check_file_name(char *str)
 	size = ft_strlen(str);
 	x = size - 4;
 	if (str[x] != '.' || str[x + 1] != 'b' || str[x + 2] != 'e' || str[x
-		+ 3] != 'r')
+			+ 3] != 'r')
 	{
 		ft_printf("Map format needs to be .ber\n");
 		return (0);
@@ -122,6 +134,6 @@ int	map_check(t_map *map, t_data *data)
 		free(data->window);
 		exit(1);
 	}
-    map_check_p2(map, data);
+	map_check_p2(map, data);
 	return (1);
 }

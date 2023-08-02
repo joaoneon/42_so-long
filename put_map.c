@@ -1,7 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   put_map.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpedro-a <jpedro-a@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/02 14:58:19 by jpedro-a          #+#    #+#             */
+/*   Updated: 2023/08/02 16:39:03 by jpedro-a         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-void	put_player_enemy(char c, t_data *data, t_img *img, int pos, int arr)
+void	put_player_enemy(char c, t_data *data, int pos, int arr)
 {
+	t_img	*img;
+
+	img = data->images_struct;
 	if (c == 'P')
 	{
 		mlx_put_image_to_window(data->mlx_display, data->window, img->player,
@@ -21,7 +36,7 @@ void	put_player_enemy(char c, t_data *data, t_img *img, int pos, int arr)
 	}
 }
 
-int	put_map(t_data *data, t_img *img, t_map *map)
+int	put_map(t_data *data, t_map *map)
 {
 	int	pos;
 	int	arr;
@@ -33,24 +48,27 @@ int	put_map(t_data *data, t_img *img, t_map *map)
 		while (map->map[arr][++pos] != '\0')
 		{
 			if (map->map[arr][pos] == '1')
-				put_map_aux(data, img, map->map[arr][pos], pos, arr);
+				put_map_aux(data, map->map[arr][pos], pos, arr);
 			else if (map->map[arr][pos] == '0')
-                put_map_aux(data, img, map->map[arr][pos], pos, arr);
+				put_map_aux(data, map->map[arr][pos], pos, arr);
 			else if (map->map[arr][pos] == 'C')
-				put_map_aux(data, img, map->map[arr][pos], pos, arr);
+				put_map_aux(data, map->map[arr][pos], pos, arr);
 			else if (map->map[arr][pos] == 'X')
-                put_map_aux(data, img, map->map[arr][pos], pos, arr);
+				put_map_aux(data, map->map[arr][pos], pos, arr);
 			else if (map->map[arr][pos] == 'P')
-				put_player_enemy('P', data, img, pos, arr);
+				put_player_enemy('P', data, pos, arr);
 			else if (map->map[arr][pos] == 'E')
-				put_player_enemy('E', data, img, pos, arr);
+				put_player_enemy('E', data, pos, arr);
 		}
 	}
 	return (1);
 }
 
-void	put_map_aux(t_data *data, t_img *img, char c, int pos, int arr)
+void	put_map_aux(t_data *data, char c, int pos, int arr)
 {
+	t_img	*img;
+
+	img = data->images_struct;
 	if (c == '1')
 	{
 		mlx_put_image_to_window(data->mlx_display, data->window, img->wall, (pos

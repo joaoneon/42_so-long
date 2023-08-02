@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_map.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpedro-a <jpedro-a@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/02 14:58:23 by jpedro-a          #+#    #+#             */
+/*   Updated: 2023/08/02 19:10:27 by jpedro-a         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 void	handle_map2(t_data *data, int fd, char *str)
@@ -40,8 +52,8 @@ int	handle_map(t_data *data, char *map_name)
 		return (0);
 	handle_map2(data, fd, str);
 	close(fd);
-	data->map_struct->map = malloc((data->map_struct->map_y + 1)
-		* sizeof(char *));
+	data->map_struct->map = ft_calloc(sizeof(char *), (data->map_struct->map_y
+				+ 1));
 	index = 0;
 	fd = open(map_name, O_RDONLY);
 	while (index < data->map_struct->map_y)
@@ -58,39 +70,37 @@ int	handle_map(t_data *data, char *map_name)
 void	load_images(t_data *data, t_img *img, t_map *map)
 {
 	img->player = mlx_xpm_file_to_image(data->mlx_display, PLAYER,
-		&data->images_struct->img_width, &img->img_height);
+			&data->images_struct->img_width, &img->img_height);
 	img->floor = mlx_xpm_file_to_image(data->mlx_display, FLOOR,
-		&img->img_width, &img->img_height);
+			&img->img_width, &img->img_height);
 	img->wall = mlx_xpm_file_to_image(data->mlx_display, WALL, &img->img_width,
-		&img->img_height);
+			&img->img_height);
 	img->enemy = mlx_xpm_file_to_image(data->mlx_display, ENEMY,
-		&img->img_width, &img->img_height);
+			&img->img_width, &img->img_height);
 	img->collectable = mlx_xpm_file_to_image(data->mlx_display, COLLECTABLE,
-		&img->img_width, &img->img_height);
+			&img->img_width, &img->img_height);
 	img->exit = mlx_xpm_file_to_image(data->mlx_display, EXIT, &img->img_width,
-		&img->img_height);
+			&img->img_height);
 	img->player_u = mlx_xpm_file_to_image(data->mlx_display, PLAYER_U,
-		&data->images_struct->img_width, &data->images_struct->img_height);
+			&data->images_struct->img_width, &data->images_struct->img_height);
 	img->player_l = mlx_xpm_file_to_image(data->mlx_display, PLAYER_L,
-		&data->images_struct->img_width, &data->images_struct->img_height);
+			&data->images_struct->img_width, &data->images_struct->img_height);
 	img->player_r = mlx_xpm_file_to_image(data->mlx_display, PLAYER_R,
-		&data->images_struct->img_width, &data->images_struct->img_height);
-	put_map(data, img, map);
+			&data->images_struct->img_width, &data->images_struct->img_height);
+	put_map(data, map);
 }
 
 int	map_flood_collectables(t_map *map)
 {
-	int collectables;
-	char **mapper;
-	int x;
-	int y;
-	int max_y;
+	int		collectables;
+	char	**mapper;
+	int		x;
+	int		y;
 
-	max_y = map->map_y - 1;
 	y = 0;
 	collectables = 0;
 	mapper = map->map_cpy;
-	while (y <= max_y)
+	while (mapper[y] != NULL)
 	{
 		x = 0;
 		while (mapper[y][x] != '\0' && mapper[y][x] != '\n')

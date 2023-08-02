@@ -1,6 +1,6 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g3
-X11FLAGS =  -L/usr/local/lib -lmlx -L/usr/X11/lib -lXext -lX11
+X11FLAGS = -lmlx -lXext -lX11
 RM = rm -f
 INC = -I./include
 SRCS_DIR = ./printf

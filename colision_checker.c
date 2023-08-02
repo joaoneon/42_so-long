@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   colision_checker.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpedro-a <jpedro-a@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/02 14:57:53 by jpedro-a          #+#    #+#             */
+/*   Updated: 2023/08/02 19:09:01 by jpedro-a         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 char	*ft_strdup(char *s)
@@ -20,12 +32,11 @@ char	*ft_strdup(char *s)
 
 void	copy_map_string(char **str, t_data *data)
 {
-	int index;
+	int	index;
 
 	index = 0;
-
-	data->map_struct->map_cpy = malloc((data->map_struct->map_y + 1)
-		* sizeof(char *));
+	data->map_struct->map_cpy = ft_calloc(sizeof(char *),
+			(data->map_struct->map_y + 1));
 	while (str[index] != NULL)
 	{
 		data->map_struct->map_cpy[index] = ft_strdup(str[index]);
@@ -80,19 +91,19 @@ int	check_colision(int keysym, t_data *data, t_img *img, t_map *map)
 	y = img->player_y;
 	if (keysym == 119 || keysym == XK_Up)
 	{
-		return (check_colision_up(data, img, map, x, y));
+		return (check_colision_up(data, map, x, y));
 	}
 	if (keysym == 115 || keysym == XK_Down)
 	{
-		return (check_colision_down(data, img, map, x, y));
+		return (check_colision_down(data, map, x, y));
 	}
 	if (keysym == 97 || keysym == XK_Left)
 	{
-		return (check_colision_left(data, img, map, x, y));
+		return (check_colision_left(data, map, x, y));
 	}
 	if (keysym == 100 || keysym == XK_Right)
 	{
-		return (check_colision_right(data, img, map, x, y));
+		return (check_colision_right(data, map, x, y));
 	}
 	return (0);
 }
