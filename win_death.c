@@ -85,7 +85,7 @@ void	map_check_p2(t_map *map, t_data *data)
 	{
 		ft_printf("after flood\n");
 		ft_printf("Failed flood fill test!\n");
-		free(data->window);
+		free_maps(data);
 		exit(1);
 	}
 }

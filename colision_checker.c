@@ -14,26 +14,28 @@
 
 char	*ft_strdup(char *s)
 {
-	char	*s2;
-	int		len;
-	int		temp;
+	int		count;
+	int		size;
+	char	*dest;
 
-	len = (int)ft_strlen(s);
-	temp = len;
-	s2 = malloc((len) * sizeof(char));
-	if (s2 == NULL)
+	size = ft_strlen(s);
+	dest = malloc(sizeof(char) * (size + 1));
+	if (dest == NULL)
+	{
+		free(dest);
 		return (NULL);
-	while (len-- > 0)
-		*s2++ = *s++;
-	*s2 = '\0';
-	s2 -= temp;
-	return (s2);
+	}
+	count = -1;
+	while (s[++count] != '\0')
+		dest[count] = s[count];
+	dest[count] = '\0';
+	return (dest);
 }
 
 void	copy_map_string(char **str, t_data *data)
 {
 	int	index;
-
+	
 	index = 0;
 	data->map_struct->map_cpy = ft_calloc(sizeof(char *),
 			(data->map_struct->map_y + 1));

@@ -41,7 +41,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (saved);
 }
 
-size_t	ft_strlen(const char *s)
+int	ft_strlen(char *s)
 {
 	size_t	i;
 

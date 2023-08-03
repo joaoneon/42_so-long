@@ -18,14 +18,17 @@ int	program_flux(t_data *data, t_img *img, t_map *map, char *av)
 	map_check(map, data);
 	data->mlx_display = mlx_init();
 	if (data->mlx_display == NULL)
-		return (MLX_ERROR);
+	{
+		free_for_finish(data);
+		exit (1);
+	}
 	data->window = mlx_new_window(data->mlx_display, (data->map_struct->map_x
 				- 1) * 64, data->map_struct->map_y * 64,
 			"Crash Bandicoot 2D experience");
 	if (data->window == NULL)
-	{
-		free(data->window);
-		return (MLX_ERROR);
+	{	
+		free_for_finish(data);
+		exit (1);
 	}
 	data->map_struct->collectables_score = 0;
 	data->steps = 0;

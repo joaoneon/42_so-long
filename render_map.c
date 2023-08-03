@@ -24,7 +24,10 @@ void	handle_map2(t_data *data, int fd, char *str)
 		free(str);
 		str = get_next_line(fd);
 		if (str == NULL)
+		{
+			free(str);
 			break ;
+		}
 		if (((int)ft_strlen(str) != data->map_struct->map_x)
 			&& (str[data->map_struct->map_x - 1] != '\0'))
 		{
@@ -32,6 +35,7 @@ void	handle_map2(t_data *data, int fd, char *str)
 		}
 		data->map_struct->map_y++;
 	}
+	free(str);
 	if (signal == 1)
 	{
 		close(fd);
@@ -49,11 +53,13 @@ int	handle_map(t_data *data, char *map_name)
 	fd = open(map_name, O_RDONLY);
 	str = get_next_line(fd);
 	if (str == NULL)
+	{
+		free(str);
 		return (0);
+	}
 	handle_map2(data, fd, str);
 	close(fd);
-	data->map_struct->map = ft_calloc(sizeof(char *), (data->map_struct->map_y
-				+ 1));
+	data->map_struct->map = ft_calloc(sizeof(char *), (data->map_struct->map_y + 1));
 	index = 0;
 	fd = open(map_name, O_RDONLY);
 	while (index < data->map_struct->map_y)
@@ -113,3 +119,29 @@ int	map_flood_collectables(t_map *map)
 	}
 	return (collectables);
 }
+
+// void	allocation(t_map *map)
+// {
+// 	int	i;
+// 	int	j;
+
+// 	map->map = malloc(map->height * sizeof(char *));
+// 	if (map->map == NULL)
+// 		error_check(7, "Error\nFail to allocate memory!", 0, NULL);
+// 	i = -1;
+// 	while (++i < map->height)
+// 	{
+// 		if (i == map->height - 1)
+// 			map->map[i] = malloc((map->width + 1) * sizeof(char));
+// 		else
+// 			map->map[i] = malloc((map->width + 2) * sizeof(char));
+// 		if (map->map[i] == NULL)
+// 		{
+// 			j = -1;
+// 			while (++j < i)
+// 				free(map->map[i]);
+// 			free(map->map);
+// 			error_check(7, "Error\nFail to allocate memory!", 0, NULL);
+// 		}
+// 	}
+// }
