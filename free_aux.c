@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colision_checker.c                                 :+:      :+:    :+:   */
+/*   free_aux.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpedro-a <jpedro-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 14:57:53 by jpedro-a          #+#    #+#             */
-/*   Updated: 2023/08/02 19:09:01 by jpedro-a         ###   ########.fr       */
+/*   Updated: 2023/08/03 16:15:46 by jpedro-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	free_maps(t_data *data)
 	t_map	*map;
 
 	map = data->map_struct;
-	if (map->map != NULL)
+	if (map->map != NULL || map->map_cpy != NULL)
 		free_map(data);
 }
 
@@ -37,13 +37,19 @@ void	free_map(t_data *data)
 
 	map = data->map_struct;
 	i = -1;
-	while (++i < map->map_y)
-		free(map->map[i]);
-	free(map->map);
+	if (map->map != NULL)
+	{
+		while (++i < map->map_y)
+			free(map->map[i]);
+		free(map->map);
+	}
 	i = -1;
-	while (++i < map->map_y)
-		free(map->map_cpy[i]);
-	free(map->map_cpy);
+	if (map->map_cpy != NULL)
+	{
+		while (++i < map->map_y)
+			free(map->map_cpy[i]);
+		free(map->map_cpy);
+	}		
 }
 
 void	free_images(t_data *data)

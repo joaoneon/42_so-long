@@ -6,7 +6,7 @@
 /*   By: jpedro-a <jpedro-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 14:58:16 by jpedro-a          #+#    #+#             */
-/*   Updated: 2023/08/02 18:21:12 by jpedro-a         ###   ########.fr       */
+/*   Updated: 2023/08/03 17:47:44 by jpedro-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	program_flux(t_data *data, t_img *img, t_map *map, char *av)
 	if (data->mlx_display == NULL)
 	{
 		free_for_finish(data);
-		exit (1);
+		exit(1);
 	}
 	data->window = mlx_new_window(data->mlx_display, (data->map_struct->map_x
 				- 1) * 64, data->map_struct->map_y * 64,
@@ -28,7 +28,7 @@ int	program_flux(t_data *data, t_img *img, t_map *map, char *av)
 	if (data->window == NULL)
 	{
 		free_for_finish(data);
-		exit (1);
+		exit(1);
 	}
 	data->map_struct->collectables_score = 0;
 	data->steps = 0;
@@ -37,5 +37,6 @@ int	program_flux(t_data *data, t_img *img, t_map *map, char *av)
 	mlx_hook(data->window, KeyPress, KeyPressMask, &handle_keypress, data);
 	mlx_hook(data->window, KeyRelease, KeyReleaseMask, &handle_keyrelease,
 		&data);
+	mlx_hook(data->window, DestroyNotify, NoEventMask, &handle_x_press, data);
 	return (1);
 }

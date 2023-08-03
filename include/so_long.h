@@ -6,7 +6,7 @@
 /*   By: jpedro-a <jpedro-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 16:43:36 by jpedro-a          #+#    #+#             */
-/*   Updated: 2023/08/02 19:08:19 by jpedro-a         ###   ########.fr       */
+/*   Updated: 2023/08/03 17:11:28 by jpedro-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,10 +120,11 @@ int			map_check_collectables(t_map *map);
 int			map_flood_collectables(t_map *map);
 void		free_maps(t_data *data);
 void		free_images(t_data *data);
-void		free_maps(t_data *data);
 void		get_player_pos(t_data *data);
 void		*ft_calloc(size_t nmemb, size_t size);
 void		*ft_memset(void *s, int c, size_t x);
 void		free_map(t_data *data);
+int			handle_x_press(t_data *data);
+int			map_check_characters(t_map *map);
 
 #endif

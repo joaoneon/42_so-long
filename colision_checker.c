@@ -6,7 +6,7 @@
 /*   By: jpedro-a <jpedro-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 14:57:53 by jpedro-a          #+#    #+#             */
-/*   Updated: 2023/08/02 19:09:01 by jpedro-a         ###   ########.fr       */
+/*   Updated: 2023/08/03 17:35:22 by jpedro-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,6 @@ char	*ft_strdup(char *s)
 		dest[count] = s[count];
 	dest[count] = '\0';
 	return (dest);
-}
-
-void	copy_map_string(char **str, t_data *data)
-{
-	int	index;
-
-	index = 0;
-	data->map_struct->map_cpy = ft_calloc(sizeof(char *),
-			(data->map_struct->map_y + 1));
-	while (str[index] != NULL)
-	{
-		data->map_struct->map_cpy[index] = ft_strdup(str[index]);
-		index++;
-	}
-	data->map_struct->map_cpy[index] = NULL;
 }
 
 void	check_collectable(t_img *img, t_map *map, char **mapper, t_data *data)

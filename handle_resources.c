@@ -6,7 +6,7 @@
 /*   By: jpedro-a <jpedro-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 17:48:35 by jpedro-a          #+#    #+#             */
-/*   Updated: 2023/08/02 14:59:13 by jpedro-a         ###   ########.fr       */
+/*   Updated: 2023/08/03 17:48:02 by jpedro-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,8 @@ int	handle_keypress(int keysym, t_data *data)
 
 	if (keysym == XK_Escape)
 	{
-		mlx_destroy_window(data->mlx_display, data->window);
-		mlx_destroy_display(data->mlx_display);
-		free(data->mlx_display);
-		ft_printf("Pressed key: %d\n", keysym);
+		free_for_finish(data);
+		ft_printf("You closed the game <(-.-)> \n");
 		exit(0);
 	}
 	map = data->map_struct;
@@ -67,4 +65,11 @@ int	handle_keyrelease(int keysym, t_data *data)
 	(void)*data;
 	(void)keysym;
 	return (0);
+}
+
+int	handle_x_press(t_data *data)
+{
+	free_for_finish(data);
+	ft_printf("You closed the game <(-.-)> \n");
+	exit (0);
 }

@@ -6,33 +6,63 @@
 /*   By: jpedro-a <jpedro-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 14:58:08 by jpedro-a          #+#    #+#             */
-/*   Updated: 2023/08/02 16:38:02 by jpedro-a         ###   ########.fr       */
+/*   Updated: 2023/08/03 17:39:58 by jpedro-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	check_file_name(char *str)
+int	map_check(t_map *map, t_data *data)
 {
-	int	fd;
-	int	size;
-	int	x;
-
-	fd = open(str, O_RDONLY);
-	if (fd == -1)
+	if (map_check_characters(map) != 0)
 	{
-		ft_printf("Couldn't open the map, verify the name of the file \n");
-		return (0);
+		ft_printf("Character not allowed\n");
+		free_maps(data);
+		exit(1);
 	}
-	size = ft_strlen(str);
-	x = size - 4;
-	if (str[x] != '.' || str[x + 1] != 'b' || str[x + 2] != 'e' || str[x
-			+ 3] != 'r')
+	if (map_check_walls(map) == 0)
 	{
-		ft_printf("Map format needs to be .ber\n");
-		return (0);
+		ft_printf("Map not surrounded by walls\n");
+		free_maps(data);
+		exit(1);
 	}
+	if (map_check_players(map) != 1)
+	{
+		ft_printf("Game has to have 1 player\n");
+		free_maps(data);
+		exit(1);
+	}
+	map_check_p2(map, data);
 	return (1);
+}
+
+int	map_check_characters(t_map *map)
+{
+	int		characters;
+	char	**mapper;
+	int		x;
+	int		y;
+	int		max_y;
+
+	max_y = map->map_y - 1;
+	y = 0;
+	characters = 0;
+	mapper = map->map_cpy;
+	while (y <= max_y)
+	{
+		x = 0;
+		while (mapper[y][x] != '\0' && mapper[y][x] != '\n')
+		{
+			if (mapper[y][x] != '1' && mapper[y][x] != 'C'
+				&& mapper[y][x] != '0' && mapper[y][x] != 'X'
+				&& mapper[y][x] != 'E' && mapper[y][x] != '\n'
+				&& mapper[y][x] != '\0' && mapper[y][x] != 'P')
+				characters++;
+			x++;
+		}
+		y++;
+	}
+	return (characters);
 }
 
 int	map_check_walls(t_map *map)
@@ -72,7 +102,7 @@ int	map_check_players(t_map *map)
 	max_y = map->map_y - 1;
 	y = 0;
 	players = 0;
-	mapper = map->map;
+	mapper = map->map_cpy;
 	while (y <= max_y)
 	{
 		x = 0;
@@ -87,53 +117,25 @@ int	map_check_players(t_map *map)
 	return (players);
 }
 
-int	map_check_collectables(t_map *map)
+int	check_file_name(char *str)
 {
-	int		collectables;
-	char	**mapper;
-	int		x;
-	int		y;
-	int		max_y;
+	int	fd;
+	int	size;
+	int	x;
 
-	max_y = map->map_y - 1;
-	y = 0;
-	collectables = 0;
-	mapper = map->map;
-	while (y <= max_y)
+	fd = open(str, O_RDONLY);
+	if (fd == -1)
 	{
-		x = 0;
-		while (mapper[y][x] != '\0' && mapper[y][x] != '\n')
-		{
-			if (mapper[y][x] == 'C')
-				collectables++;
-			x++;
-		}
-		y++;
+		ft_printf("Couldn't open the map, verify the name of the file \n");
+		return (0);
 	}
-	map->collectables_amount = collectables;
-	return (collectables);
-}
-
-int	map_check(t_map *map, t_data *data)
-{
-	if (map_check_walls(map) == 0)
+	size = ft_strlen(str);
+	x = size - 4;
+	if (str[x] != '.' || str[x + 1] != 'b' || str[x + 2] != 'e' || str[x
+			+ 3] != 'r')
 	{
-		ft_printf("Map not surrounded by walls\n");
-		free(data->window);
-		exit(1);
+		ft_printf("Map format needs to be .ber\n");
+		return (0);
 	}
-	if (map_check_players(map) != 1)
-	{
-		ft_printf("Game has to have 1 player\n");
-		free(data->window);
-		exit(1);
-	}
-	if (map_check_collectables(map) <= 0)
-	{
-		ft_printf("Game needs at least one collectable\n");
-		free(data->window);
-		exit(1);
-	}
-	map_check_p2(map, data);
 	return (1);
 }

@@ -10,9 +10,11 @@ FILES = ${SRCS_DIR}/ft_printf.c ${SRCS_DIR}/put_char.c \
 			${SRCS_DIR}/put_integer.c ${SRCS_DIR}/put_unsigint.c \
 			${SRCS_DIR}/put_hex.c ${GNL_DIR}/get_next_line_utils.c \
 			${GNL_DIR}/get_next_line.c  main.c handle_resources.c \
-			map_checker.c render_map.c colision_checker.c \
-			win_death.c itoa.c movement_aux.c put_map.c \
-			program_flux.c colision_aux.c free_aux.c
+			colision_aux.c colision_checker.c copy_map.c \
+			free_aux.c load_images.c map_checker.c map_checker2.c \
+			movement_aux.c program_flux.c put_map.c render_map.c \
+			some_resources.c win_death.c
+
 OBJS = ${FILES:.c=.o}
 NAME = so_long
 

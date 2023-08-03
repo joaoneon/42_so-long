@@ -6,35 +6,11 @@
 /*   By: jpedro-a <jpedro-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 14:58:19 by jpedro-a          #+#    #+#             */
-/*   Updated: 2023/08/02 16:39:03 by jpedro-a         ###   ########.fr       */
+/*   Updated: 2023/08/03 17:49:46 by jpedro-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	put_player_enemy(char c, t_data *data, int pos, int arr)
-{
-	t_img	*img;
-
-	img = data->images_struct;
-	if (c == 'P')
-	{
-		mlx_put_image_to_window(data->mlx_display, data->window, img->player,
-			(pos * 64), (arr * 64));
-		img->x = pos * 64;
-		img->y = arr * 64;
-		img->player_x = pos;
-		img->player_y = arr;
-	}
-	if (c == 'E')
-	{
-		data->map_struct->exit_x = pos;
-		data->map_struct->exit_y = arr;
-		mlx_put_image_to_window(data->mlx_display, data->window, img->floor,
-			(pos * 64), (arr * 64));
-		data->map_struct->exit_signal = 0;
-	}
-}
 
 int	put_map(t_data *data, t_map *map)
 {
@@ -62,6 +38,30 @@ int	put_map(t_data *data, t_map *map)
 		}
 	}
 	return (1);
+}
+
+void	put_player_enemy(char c, t_data *data, int pos, int arr)
+{
+	t_img	*img;
+
+	img = data->images_struct;
+	if (c == 'P')
+	{
+		mlx_put_image_to_window(data->mlx_display, data->window, img->player,
+			(pos * 64), (arr * 64));
+		img->x = pos * 64;
+		img->y = arr * 64;
+		img->player_x = pos;
+		img->player_y = arr;
+	}
+	if (c == 'E')
+	{
+		data->map_struct->exit_x = pos;
+		data->map_struct->exit_y = arr;
+		mlx_put_image_to_window(data->mlx_display, data->window, img->floor,
+			(pos * 64), (arr * 64));
+		data->map_struct->exit_signal = 0;
+	}
 }
 
 void	put_map_aux(t_data *data, char c, int pos, int arr)
