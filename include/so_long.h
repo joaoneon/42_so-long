@@ -124,6 +124,6 @@ void		free_maps(t_data *data);
 void		get_player_pos(t_data *data);
 void		*ft_calloc(size_t nmemb, size_t size);
 void		*ft_memset(void *s, int c, size_t x);
-void	free_map(t_data *data);
+void		free_map(t_data *data);
 
 #endif

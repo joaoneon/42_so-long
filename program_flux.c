@@ -26,7 +26,7 @@ int	program_flux(t_data *data, t_img *img, t_map *map, char *av)
 				- 1) * 64, data->map_struct->map_y * 64,
 			"Crash Bandicoot 2D experience");
 	if (data->window == NULL)
-	{	
+	{
 		free_for_finish(data);
 		exit (1);
 	}

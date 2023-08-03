@@ -24,10 +24,7 @@ void	handle_map2(t_data *data, int fd, char *str)
 		free(str);
 		str = get_next_line(fd);
 		if (str == NULL)
-		{
-			free(str);
 			break ;
-		}
 		if (((int)ft_strlen(str) != data->map_struct->map_x)
 			&& (str[data->map_struct->map_x - 1] != '\0'))
 		{
@@ -59,13 +56,13 @@ int	handle_map(t_data *data, char *map_name)
 	}
 	handle_map2(data, fd, str);
 	close(fd);
-	data->map_struct->map = ft_calloc(sizeof(char *), (data->map_struct->map_y + 1));
-	index = 0;
+	data->map_struct->map = ft_calloc(sizeof(char *), 
+			(data->map_struct->map_y + 1));
+	index = -1;
 	fd = open(map_name, O_RDONLY);
-	while (index < data->map_struct->map_y)
+	while (++index < data->map_struct->map_y)
 	{
 		data->map_struct->map[index] = get_next_line(fd);
-		index++;
 	}
 	close(fd);
 	data->map_struct->map[index] = NULL;

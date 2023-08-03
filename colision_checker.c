@@ -35,7 +35,7 @@ char	*ft_strdup(char *s)
 void	copy_map_string(char **str, t_data *data)
 {
 	int	index;
-	
+
 	index = 0;
 	data->map_struct->map_cpy = ft_calloc(sizeof(char *),
 			(data->map_struct->map_y + 1));

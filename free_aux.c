@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   colision_checker.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpedro-a <jpedro-a@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/02 14:57:53 by jpedro-a          #+#    #+#             */
+/*   Updated: 2023/08/02 19:09:01 by jpedro-a         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 void	free_for_finish(t_data *data)
@@ -18,18 +30,17 @@ void	free_maps(t_data *data)
 		free_map(data);
 }
 
-
 void	free_map(t_data *data)
 {
-    t_map *map;
-	int	i;
+	t_map	*map;
+	int		i;
 
-    map = data->map_struct;
+	map = data->map_struct;
 	i = -1;
 	while (++i < map->map_y)
 		free(map->map[i]);
 	free(map->map);
-    i = -1;
+	i = -1;
 	while (++i < map->map_y)
 		free(map->map_cpy[i]);
 	free(map->map_cpy);
