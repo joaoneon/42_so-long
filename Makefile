@@ -1,19 +1,36 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jpedro-a <jpedro-a@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/08/03 18:14:45 by jpedro-a          #+#    #+#              #
+#    Updated: 2023/08/03 18:22:10 by jpedro-a         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g3
 X11FLAGS = -lmlx -lXext -lX11
 RM = rm -f
 INC = -I./include
-SRCS_DIR = ./printf
+PRINT_DIR = ./printf
 GNL_DIR = ./gnl
-FILES = ${SRCS_DIR}/ft_printf.c ${SRCS_DIR}/put_char.c \
-			${SRCS_DIR}/put_string.c ${SRCS_DIR}/put_pointerall.c \
-			${SRCS_DIR}/put_integer.c ${SRCS_DIR}/put_unsigint.c \
-			${SRCS_DIR}/put_hex.c ${GNL_DIR}/get_next_line_utils.c \
-			${GNL_DIR}/get_next_line.c  main.c handle_resources.c \
-			colision_aux.c colision_checker.c copy_map.c \
-			free_aux.c load_images.c map_checker.c map_checker2.c \
-			movement_aux.c program_flux.c put_map.c render_map.c \
-			some_resources.c win_death.c
+SRCS_DIR = ./srcs
+FILES = ${PRINT_DIR}/ft_printf.c ${PRINT_DIR}/put_char.c \
+			${PRINT_DIR}/put_string.c ${PRINT_DIR}/put_pointerall.c \
+			${PRINT_DIR}/put_integer.c ${PRINT_DIR}/put_unsigint.c \
+			${PRINT_DIR}/put_hex.c ${GNL_DIR}/get_next_line_utils.c \
+			${GNL_DIR}/get_next_line.c main.c ${SRCS_DIR}/win_death.c \
+			${SRCS_DIR}/handle_resources.c \
+			${SRCS_DIR}/colision_aux.c ${SRCS_DIR}/colision_checker.c \
+			${SRCS_DIR}/copy_map.c ${SRCS_DIR}/free_aux.c \
+			${SRCS_DIR}/load_images.c ${SRCS_DIR}/map_checker.c \
+			${SRCS_DIR}/map_checker2.c ${SRCS_DIR}/movement_aux.c \
+			${SRCS_DIR}/program_flux.c ${SRCS_DIR}/put_map.c \
+			${SRCS_DIR}/render_map.c ${SRCS_DIR}/some_resources.c \
+			  
 
 OBJS = ${FILES:.c=.o}
 NAME = so_long
