@@ -42,9 +42,6 @@ int	handle_map(t_data *data, char *map_name)
 
 void	handle_map2(t_data *data, int fd, char *str)
 {
-	int	signal;
-
-	signal = 0;
 	data->map_struct->map_x = (int)ft_strlen(str);
 	data->map_struct->map_y = 1;
 	while (str != NULL)

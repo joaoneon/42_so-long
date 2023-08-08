@@ -32,11 +32,26 @@
 # define EXIT "./imgs/exit_64.xpm"
 # define COLLECTABLE "./imgs/collectable_64.xpm"
 # define ENEMY "./imgs/enemy_64.xpm"
+# define DEATH_1 "./imgs/death_1.xpm"
+# define DEATH_2 "./imgs/death_2.xpm"
+# define DEATH_3 "./imgs/death_3.xpm"
+# define DEATH_4 "./imgs/death_4.xpm"
+# define DEATH_5 "./imgs/death_5.xpm"
+# define DEATH_6 "./imgs/death_6.xpm"
+# define EXIT_1 "./imgs/exit_1.xpm"
+# define EXIT_2 "./imgs/exit_2.xpm"
+# define EXIT_3 "./imgs/exit_3.xpm"
+# define EXIT_4 "./imgs/exit_4.xpm"
+# define EXIT_5 "./imgs/exit_5.xpm"
+# define EXIT_6 "./imgs/exit_6.xpm"
+# define EXIT_7 "./imgs/exit_7.xpm"
+# define CRATE "./imgs/crate_steps.xpm"
 
 typedef struct s_map
 {
 	char	**map;
 	char	**map_cpy;
+	void	*crate_steps;
 	int		player_x;
 	int		player_y;
 	int		exit_x;
@@ -59,6 +74,19 @@ typedef struct s_img
 	void	*collectable;
 	void	*enemy;
 	void	*exit;
+	void	*death_1;
+	void	*death_2;
+	void	*death_3;
+	void	*death_4;
+	void	*death_5;
+	void	*death_6;
+	void	*exit_1;
+	void	*exit_2;
+	void	*exit_3;
+	void	*exit_4;
+	void	*exit_5;
+	void	*exit_6;
+	void	*exit_7;
 	int		x;
 	int		y;
 	int		img_width;
@@ -126,5 +154,12 @@ void		*ft_memset(void *s, int c, size_t x);
 void		free_map(t_data *data);
 int			handle_x_press(t_data *data);
 int			map_check_characters(t_map *map);
+void		load_images_2(t_data *data, t_img *img);
+void		free_images_2(t_data *data);
+void		free_images_3(t_data *data);
+void		put_death_animation(int i, t_data *data, t_img *img);
+void		put_win_animation(int i, t_data *data, t_img *img);
+void		put_steps_clean(t_data *data);
+int			check_player_to_floor(int x, int y, char **mapper, t_data *data);
 
 #endif

@@ -24,21 +24,25 @@ void	handle_movement(int keysym, t_data *data, t_img *img, t_map *map)
 	if ((keysym == 119 || keysym == XK_Up) && (check_colision(keysym, data, img,
 				map)))
 	{
+		put_steps_clean(data);
 		move_up(data);
 	}
 	if ((keysym == 97 || keysym == XK_Left) && (check_colision(keysym, data,
 				img, map)))
 	{
+		put_steps_clean(data);
 		move_left(data);
 	}
 	if ((keysym == 115 || keysym == XK_Down) && (check_colision(keysym, data,
 				img, map)))
 	{
+		put_steps_clean(data);
 		move_down(data);
 	}
 	if ((keysym == 100 || keysym == XK_Right) && (check_colision(keysym, data,
 				img, map)))
 	{
+		put_steps_clean(data);
 		move_right(data);
 	}
 }

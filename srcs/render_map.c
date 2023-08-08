@@ -35,3 +35,16 @@ int	map_flood_collectables(t_map *map)
 	}
 	return (collectables);
 }
+
+void	free_images_3(t_data *data)
+{
+	t_img	*img;
+
+	img = data->images_struct;
+	if (img->exit_5 != NULL)
+		mlx_destroy_image(data->mlx_display, img->exit_5);
+	if (img->exit_6 != NULL)
+		mlx_destroy_image(data->mlx_display, img->exit_6);
+	if (img->exit_7 != NULL)
+		mlx_destroy_image(data->mlx_display, img->exit_7);
+}

@@ -29,6 +29,10 @@ int	check_colision_up(t_data *data, t_map *map, int x, int y)
 	}
 	else
 	{
+		if (check_player_to_floor(img->player_x, img->player_y - 1, mapper,
+				data))
+			mlx_put_image_to_window(data->mlx_display, data->window, img->floor,
+				(img->player_x * 64), img->player_y * 64);
 		img->player_y -= 1;
 		check_collectable(img, map, mapper, data);
 		check_exit(map, img, mapper, data);
@@ -53,6 +57,10 @@ int	check_colision_down(t_data *data, t_map *map, int x, int y)
 	}
 	else
 	{
+		if (check_player_to_floor(img->player_x, img->player_y + 1, mapper,
+				data))
+			mlx_put_image_to_window(data->mlx_display, data->window, img->floor,
+				(img->player_x * 64), img->player_y * 64);
 		img->player_y += 1;
 		check_collectable(img, map, mapper, data);
 		check_exit(map, img, mapper, data);
@@ -77,6 +85,10 @@ int	check_colision_left(t_data *data, t_map *map, int x, int y)
 	}
 	else
 	{
+		if (check_player_to_floor(img->player_x - 1, img->player_y, mapper,
+				data))
+			mlx_put_image_to_window(data->mlx_display, data->window, img->floor,
+				(img->player_x * 64), img->player_y * 64);
 		img->player_x -= 1;
 		check_collectable(img, map, mapper, data);
 		check_exit(map, img, mapper, data);
@@ -102,8 +114,19 @@ int	check_colision_right(t_data *data, t_map *map, int x, int y)
 	else
 	{
 		img->player_x += 1;
+		if (check_player_to_floor(img->player_x + 1, img->player_y, mapper,
+				data))
+			mlx_put_image_to_window(data->mlx_display, data->window, img->floor,
+				(img->player_x * 64), img->player_y * 64);
 		check_collectable(img, map, mapper, data);
 		check_exit(map, img, mapper, data);
 		return (1);
 	}
+}
+
+int	check_player_to_floor(int x, int y, char **mapper, t_data *data)
+{
+	if (mapper[y][x] == 'E' && data->map_struct->exit_signal == 1)
+		return (1);
+	return (0);
 }

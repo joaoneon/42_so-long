@@ -15,6 +15,8 @@
 void	free_for_finish(t_data *data)
 {
 	free_images(data);
+	free_images_2(data);
+	free_images_3(data);
 	mlx_destroy_window(data->mlx_display, data->window);
 	mlx_destroy_display(data->mlx_display);
 	free_maps(data);
@@ -49,7 +51,7 @@ void	free_map(t_data *data)
 		while (++i < map->map_y)
 			free(map->map_cpy[i]);
 		free(map->map_cpy);
-	}		
+	}
 }
 
 void	free_images(t_data *data)
@@ -75,4 +77,33 @@ void	free_images(t_data *data)
 		mlx_destroy_image(data->mlx_display, img->enemy);
 	if (img->exit != NULL)
 		mlx_destroy_image(data->mlx_display, img->exit);
+	if (data->map_struct->crate_steps != NULL)
+		mlx_destroy_image(data->mlx_display, data->map_struct->crate_steps);
+}
+
+void	free_images_2(t_data *data)
+{
+	t_img	*img;
+
+	img = data->images_struct;
+	if (img->death_1 != NULL)
+		mlx_destroy_image(data->mlx_display, img->death_1);
+	if (img->death_2 != NULL)
+		mlx_destroy_image(data->mlx_display, img->death_2);
+	if (img->death_3 != NULL)
+		mlx_destroy_image(data->mlx_display, img->death_3);
+	if (img->death_4 != NULL)
+		mlx_destroy_image(data->mlx_display, img->death_4);
+	if (img->death_5 != NULL)
+		mlx_destroy_image(data->mlx_display, img->death_5);
+	if (img->death_6 != NULL)
+		mlx_destroy_image(data->mlx_display, img->death_6);
+	if (img->exit_1 != NULL)
+		mlx_destroy_image(data->mlx_display, img->exit_1);
+	if (img->exit_2 != NULL)
+		mlx_destroy_image(data->mlx_display, img->exit_2);
+	if (img->exit_3 != NULL)
+		mlx_destroy_image(data->mlx_display, img->exit_3);
+	if (img->exit_4 != NULL)
+		mlx_destroy_image(data->mlx_display, img->exit_4);
 }
