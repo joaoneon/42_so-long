@@ -6,7 +6,7 @@
 /*   By: jpedro-a <jpedro-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 14:58:19 by jpedro-a          #+#    #+#             */
-/*   Updated: 2023/08/03 17:49:46 by jpedro-a         ###   ########.fr       */
+/*   Updated: 2023/08/08 16:22:50 by jpedro-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,30 @@ void	put_map_aux(t_data *data, char c, int pos, int arr)
 		mlx_put_image_to_window(data->mlx_display, data->window, img->enemy,
 			(pos * 64), (arr * 64));
 	}
+}
+
+int	map_check_retangular(t_map *map)
+{
+	int	y;
+
+	y = -1;
+	if (map->map_x > 31 || map->map_y > 16)
+	{
+		ft_printf("O mapa é muito grande !! D: \n");
+		return (1);
+	}
+	while (++y < map->map_y - 1)
+	{
+		if (ft_strlen(map->map[y]) != map->map_x)
+		{
+			ft_printf("O mapa não é retangular !! D: \n");
+			return (1);
+		}
+	}
+	if (ft_strlen(map->map[y]) != map->map_x - 1)
+	{
+		ft_printf("O mapa não é retangular !! D: \n");
+		return (1);
+	}
+	return (0);
 }

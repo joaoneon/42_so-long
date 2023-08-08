@@ -6,7 +6,7 @@
 /*   By: jpedro-a <jpedro-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 16:43:36 by jpedro-a          #+#    #+#             */
-/*   Updated: 2023/08/03 17:11:28 by jpedro-a         ###   ########.fr       */
+/*   Updated: 2023/08/08 16:21:16 by jpedro-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,5 +161,6 @@ void		put_death_animation(int i, t_data *data, t_img *img);
 void		put_win_animation(int i, t_data *data, t_img *img);
 void		put_steps_clean(t_data *data);
 int			check_player_to_floor(int x, int y, char **mapper, t_data *data);
+int			map_check_retangular(t_map *map);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jpedro-a <jpedro-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 14:58:08 by jpedro-a          #+#    #+#             */
-/*   Updated: 2023/08/03 17:39:58 by jpedro-a         ###   ########.fr       */
+/*   Updated: 2023/08/08 16:21:23 by jpedro-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 int	map_check(t_map *map, t_data *data)
 {
+	if (map_check_retangular(map) == 1)
+	{
+		free_maps(data);
+		exit(1);
+	}
 	if (map_check_characters(map) != 0)
 	{
 		ft_printf("Character not allowed\n");
