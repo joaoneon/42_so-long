@@ -2,7 +2,7 @@
   42_so-long
 </h1>
 <p align="center">
-  <img src="https://github.com/joaoneon/42_so-long/assets/6489188/faad9b2b-a141-4340-a60e-9535f35009ca">
+  <img src="https://github.com/joaoneon/42_so-long/assets/6489188/334f60db-c9ab-4bcf-92e5-e97790bcb1bb">
 </p>
 
 <h3 align="left">
@@ -29,14 +29,16 @@ This repository contains the entire codebase for the so_long project, encompassi
   Win animation  
 </h3>
 
-   <img src="https://github.com/joaoneon/42_so-long/assets/6489188/35d2c361-aed4-45a9-b0c4-4fffc8cef599" /><br>
-   
+   <img src="https://github.com/joaoneon/42_so-long/assets/6489188/33380257-8135-48b3-b941-f497ffbe7601" /><br>   
   <h3 align=>
 
   Death animation  
 </h3>
- <img src="https://github.com/joaoneon/42_so-long/assets/6489188/25682840-6c3e-47c1-a062-0fe25a2f599e" /><br>
+ <img src="https://github.com/joaoneon/42_so-long/assets/6489188/070c2d4a-ba91-474a-8936-9d396fa20e74" /><br>
+
+ 
   <h3 align=>
+
   Mandatory Part  
 </h3>
 
@@ -204,9 +206,8 @@ The player must die, and the game needs to be finished when coliding with an ene
    Final score  
 </h3>
 <p align="left">
-  <img src="https://github.com/joaoneon/42_so-long/assets/6489188/75b29191-b43b-4c38-bd4c-f3c6ce556c76">
+  <img src="https://github.com/joaoneon/42_so-long/assets/6489188/0f04a2e3-aca7-445c-bfdd-49a9f4160938">
 </p>
-
 
    <h3 align=>
   Instructions to use
